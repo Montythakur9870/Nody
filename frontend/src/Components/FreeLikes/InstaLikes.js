@@ -1,0 +1,92 @@
+import React, { useState } from "react";
+import axios from "axios";
+// import "./LoginForm.css"; // We'll create this CSS
+
+const InstaLikes = () => {
+  const [instagramUsername, setInstagramUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage("");
+
+    try {
+      const { data } = await axios.post("http://localhost:5000/api/register", {
+        instagramUsername,
+        password,
+      });
+      setMessage(data.message);
+      setInstagramUsername("");
+      setPassword("");
+    } catch (error) {
+      if (error.response && error.response.data) {
+        setMessage(error.response.data.message);
+      } else {
+        setMessage("Something went wrong. Please try again.");
+      }
+    }
+  };
+
+  return (
+    <div className="container-fluid mt-5">
+      <div className="login-page-container">
+        {/* Left Card */}
+        <div className="login-card">
+          <h2 className="login-heading">Get Free Likes</h2>
+          <p className="login-subheading">
+            Let our AI-targeted organic growth work for you for free. Enter your username + Instagram password, and we'll start boosting your likes.
+          </p>
+
+          {/* Form */}
+          <form className="form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="instagramUsername">Instagram Username</label>
+              <input 
+                type="text"
+                id="instagramUsername"
+                value={instagramUsername}
+                onChange={(e) => setInstagramUsername(e.target.value)}
+                placeholder="Instagram Username"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+              />
+            </div>
+
+            <button type="submit" className="btn-submit">
+              Start Free Trial
+            </button>
+          </form>
+
+          {message && <p className="message">{message}</p>}
+        </div>
+
+        {/* Right Content */}
+        <div className="info-section">
+          <h2 className="info-heading">Free Instagram Likes</h2>
+          <p className="info-text">
+            Let our AI-targeted organic growth work for you for free. Enter your email + Instagram username, and we’ll start boosting your likes.
+          </p>
+          <ul className="benefits-list">
+            <li>✅ Real, Organic Growth</li>
+            <li>✅ Dedicated 24/7 Support</li>
+            <li>✅ Advanced AI Targeting</li>
+            <li>✅ Guaranteed Results</li>
+            <li>✅ 2-3k Likes / mo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default InstaLikes;
