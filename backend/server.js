@@ -37,16 +37,13 @@ const authMechanism = "SCRAM-SHA-1";
 
 const uri = `mongodb+srv://${username}:${password}@${clusterUrl}?authMechanism=${authMechanism}&retryWrites=true&w=majority`;
 
-mongoose
-  .connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+mongoose.connect(uri)
   .then(() => console.log('Database connected successfully'))
   .catch((error) => {
     console.error('Error in DB Connection', error);
     process.exit(1);
   });
+
 
 // Serve static assets if in production mode
 if (process.env.NODE_ENV === 'production') {
