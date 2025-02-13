@@ -20,6 +20,8 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
+const _dirname = path.resolve();
+
 // CORS configuration
 const corsOptions = {
   origin: ['http://localhost:3000'], // Update or extend this array as needed
@@ -57,6 +59,8 @@ if (process.env.NODE_ENV === 'production') {
 const userRoutes = require("./routes/userRoute");
 app.use('/api', userRoutes);
 
+
+// app.use(express.static(path.json(_dirname,"/frontend/disc")))
 // Create and start the HTTP server
 const server = http.createServer(app);
 server.listen(PORT, () => {
