@@ -20,11 +20,9 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-const _dirname = path.resolve();
-
 // CORS configuration
 const corsOptions = {
-  origin: ['http://localhost:3000'], // Update or extend this array as needed
+  origin: ['http://localhost:3000'], // Update as needed
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 200,
@@ -46,19 +44,20 @@ mongoose.connect(uri)
     process.exit(1);
   });
 
-
-  app.use(express.static(path.join(__dirname, '../frontend/build')));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
-  });
-  
-
-// Import and mount routes
+// -------------------------
+// Mount API Routes First
+// -------------------------
 const userRoutes = require("./routes/userRoute");
 app.use('/api', userRoutes);
 
+// -------------------------
+// Serve Static Files & Frontend
+// -------------------------
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
+});
 
-// app.use(express.static(path.json(_dirname,"/frontend/disc")))
 // Create and start the HTTP server
 const server = http.createServer(app);
 server.listen(PORT, () => {
