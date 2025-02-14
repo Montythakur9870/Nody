@@ -27,7 +27,7 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
+    // Allow requests with no origin (e.g., mobile apps, curl)
     if (!origin) return callback(null, true);
     if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
@@ -41,6 +41,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));  // <-- This line handles preflight
+
 
 // MongoDB connection setup
 const username = encodeURIComponent("montythakur12345679");
@@ -57,19 +59,14 @@ mongoose.connect(uri)
     process.exit(1);
   });
 
-// -------------------------
-// Mount API Routes First
-// -------------------------
 const userRoutes = require("./routes/userRoute");
 app.use('/api', userRoutes);
 
-// -------------------------
-// Serve Static Files & Frontend
-// -------------------------
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
 });
+
 
 // Create and start the HTTP server
 const server = http.createServer(app);
