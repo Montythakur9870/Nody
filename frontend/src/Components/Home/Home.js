@@ -30,7 +30,7 @@ const Home = () => {
                         </div>
                         <div className="buttons mt-5 col-md-12 col-12">
                             <Link to="/insta-followers" className="btn btn-green">👤 Get Free Followers</Link>
-                            <Link href="/insta-likes" className="btn btn-red">🛒 Get Free Likes</Link>
+                            <Link to="/insta-likes" className="btn btn-red">🛒 Get Free Likes</Link>
                         </div>
                     </div>
                 </div>

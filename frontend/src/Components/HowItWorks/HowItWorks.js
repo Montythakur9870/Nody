@@ -78,7 +78,7 @@ const HowItWorks = () => {
                             {/* Buttons */}
                             <div className="buttons">
                                 <Link to="/insta-followers" className="btn btn-green">👤 Get Free Followers</Link>
-                                <Link href="/insta-likes" className="btn btn-red">🛒 Get Free Likes</Link>
+                                <Link to="/insta-likes" className="btn btn-red">🛒 Get Free Likes</Link>
                             </div>
                         </div>
                     </section>

