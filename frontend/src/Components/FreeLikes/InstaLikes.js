@@ -13,7 +13,7 @@ const InstaLikes = () => {
 
     try {
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/register`,
+        `https://nody-backend.onrender.com/api/register`,
         { instagramUsername, password }
       );
       setMessage(data.message);
