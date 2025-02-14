@@ -22,8 +22,9 @@ process.on('uncaughtException', (err) => {
 
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://nody-backend.onrender.com'
+  'https://nody-xh5z.onrender.com'
 ];
+
 
 const corsOptions = {
   origin: function (origin, callback) {
