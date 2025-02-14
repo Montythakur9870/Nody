@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 const Home = () => {
     return (
         <div>
-            <section class="hero-1-bg bg-light homebannerbg" id="home">
-                <div class="container">
-                    <div class="align-items-center justify-content-center row">
-                        <div class="col-lg-6">
+            <section className="hero-1-bg bg-light homebannerbg" id="home">
+                <div className="container">
+                    <div className="align-items-center justify-content-center row">
+                        <div className="col-lg-6">
                             <h1
                                 className="display-4 fw-medium mb-4"
                                 style={{
@@ -19,13 +19,13 @@ const Home = () => {
                             >
                                 Hello,
                             </h1>
-                            <h1 class="hero-1-title fw-normal text-dark mb-4">Grow Your Instagram Instantly!</h1>
-                            <p class="text-muted mb-4 pb-3">Increase your Instagram followers, likes, and comments effortlessly. Get real engagement and boost your profile visibility today.</p>
-                            <Link class="btn btn-primary" to="/insta-followers">Get Free Followers <span class="ml-2 right-icon">→</span></Link>
+                            <h1 className="hero-1-title fw-normal text-dark mb-4">Grow Your Instagram Instantly!</h1>
+                            <p className="text-muted mb-4 pb-3">Increase your Instagram followers, likes, and comments effortlessly. Get real engagement and boost your profile visibility today.</p>
+                            <Link className="btn btn-primary" to="/insta-followers">Get Free Followers <span className="ml-2 right-icon">→</span></Link>
                         </div>
-                        <div class="col-md-10 col-lg-6">
-                            <div class=" mt-5 mt-lg-0"><img src={homebanner} alt=""
-                                class="img-fluid d-block mx-auto" /></div>
+                        <div className="col-md-10 col-lg-6">
+                            <div className=" mt-5 mt-lg-0"><img src={homebanner} alt=""
+                                className="img-fluid d-block mx-auto" /></div>
 
                         </div>
                         <div className="buttons mt-5 col-md-12 col-12">

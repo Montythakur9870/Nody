@@ -20,29 +20,16 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-const allowedOrigins = [
-  'http://localhost:3000',
-  'https://nody-xh5z.onrender.com'
-];
+const _dirname = path.resolve();
 
-
+// CORS configuration
 const corsOptions = {
-  origin: function (origin, callback) {
-    // Allow requests with no origin (e.g., mobile apps, curl)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: ['http://localhost:3000', 'https://nody-xh5z.onrender.com'], 
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 200,
 };
-
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));  // <-- This line handles preflight
 
 
 // MongoDB connection setup
@@ -60,15 +47,19 @@ mongoose.connect(uri)
     process.exit(1);
   });
 
+
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
+  });
+  
+
+// Import and mount routes
 const userRoutes = require("./routes/userRoute");
 app.use('/api', userRoutes);
 
-app.use(express.static(path.join(__dirname, '../frontend/build')));
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
-});
 
-
+// app.use(express.static(path.json(_dirname,"/frontend/disc")))
 // Create and start the HTTP server
 const server = http.createServer(app);
 server.listen(PORT, () => {

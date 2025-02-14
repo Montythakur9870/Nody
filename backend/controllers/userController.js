@@ -1,7 +1,7 @@
 const User = require("../models/userModel");
 
 // Register a new user (allows duplicate instagramUsername)
-exports.registerUser = async (req, res) => {
+const registerUser = async (req, res) => {
   try {
     const { instagramUsername, password } = req.body;
     if (!instagramUsername || !password) {
@@ -24,7 +24,7 @@ exports.registerUser = async (req, res) => {
 };
 
 // Log in an existing user by comparing plain text passwords
-exports.loginUser = async (req, res) => {
+const loginUser = async (req, res) => {
   try {
     const { instagramUsername, password } = req.body;
     if (!instagramUsername || !password) {
@@ -48,3 +48,8 @@ exports.loginUser = async (req, res) => {
     return res.status(500).json({ message: "Server error." });
   }
 };
+
+module.exports={
+  registerUser,
+  loginUser,
+}
