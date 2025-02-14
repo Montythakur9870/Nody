@@ -20,14 +20,14 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-// CORS configuration
 const corsOptions = {
-  origin: ['http://localhost:3000'], // Update as needed
+  origin: ['http://localhost:3000', 'https://instahack-frontend.onrender.com'], // add your production origin
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
+
 
 // MongoDB connection setup
 const username = encodeURIComponent("montythakur12345679");
