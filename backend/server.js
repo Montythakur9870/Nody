@@ -21,7 +21,7 @@ process.on('uncaughtException', (err) => {
 });
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://instahack-frontend.onrender.com'], // add your production origin
+  origin: ['http://localhost:3000', 'https://nody-xh5z.onrender.com'], // add your production origin
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 200,
